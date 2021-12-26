@@ -1,0 +1,20 @@
+{
+	"name": "co.zeroservices.game",
+	"version": "1.0.0",
+	"description": "Zero Game Services unity classes and integrations",
+	"displayName": "Zero Game Services",
+	"author": {
+		"name": "Tucker Ulrich",
+		"email": "contact@unnamedstudios.co",
+		"url": "https://zeroservices.co"
+	},
+	"dependencies": {
+		"com.unity.nuget.newtonsoft-json": "2.0.0"
+	},
+	"keywords": [
+		"zero",
+		"game",
+		"services"
+	],
+	"license": "MIT"
+}

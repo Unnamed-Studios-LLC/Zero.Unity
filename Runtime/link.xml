@@ -1,0 +1,9 @@
+﻿<linker>
+  <!--
+  Preserve types and members in an assembly
+  -->
+  <assembly fullname="Zero.Gdk">
+  <assembly fullname="Zero.Node">
+  <assembly fullname="Zero.Node.Client">
+  <assembly fullname="Newtonsoft.Json">
+</linker>
