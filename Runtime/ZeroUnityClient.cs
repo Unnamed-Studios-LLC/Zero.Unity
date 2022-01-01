@@ -19,7 +19,7 @@ namespace Zero.Game
 			_type = type;
 		}
 
-		public Task async Connect(IPAddress ipAddress, string key)
+		public async Task Connect(IPAddress ipAddress, string key)
 		{
 			try
 			{
