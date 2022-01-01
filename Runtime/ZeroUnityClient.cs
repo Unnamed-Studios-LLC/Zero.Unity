@@ -13,18 +13,23 @@ namespace Zero.Game
 		private readonly ClientNode _node;
 		private readonly ushort _type;
 
-		private Task<bool> _startTask;
-
 		public ZeroUnityClient(ISetup setup, ushort type)
 		{
 			_node = new ClientNode(setup, _logger);
 			_type = type;
 		}
 
-		public void Connect(IPAddress ipAddress, string key)
+		public Task async Connect(IPAddress ipAddress, string key)
 		{
-			Debug.Log(key);
-			_startTask = _node.StartAsync(ipAddress, _type, key);
+			try
+			{
+				var result = await _node.StartAsync(ipAddress, _type, key);
+				_logger.LogInformation($"Connect result: {result}");
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e, "An error occurred during Connect");
+			}
 		}
 
 		public void Disconnect()
@@ -35,34 +40,12 @@ namespace Zero.Game
 		public void Update()
 		{
 			_logger.Update();
-			UpdateStarting();
 			UpdateNode();
 		}
 
 		private void UpdateNode()
 		{
 			_node.Update();
-		}
-
-		private void UpdateStarting()
-		{
-			if (_startTask == null ||
-				!_startTask.IsCompleted)
-			{
-				return;
-			}
-
-			try
-			{
-				var result = _startTask.Result;
-				Debug.Log("Connect result: " + result);
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e);
-			}
-
-			_startTask = null;
 		}
 	}
 }

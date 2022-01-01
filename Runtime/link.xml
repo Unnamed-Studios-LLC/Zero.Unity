@@ -2,8 +2,11 @@
   <!--
   Preserve types and members in an assembly
   -->
-  <assembly fullname="Zero.Gdk">
-  <assembly fullname="Zero.Node">
-  <assembly fullname="Zero.Node.Client">
-  <assembly fullname="Newtonsoft.Json">
+  <assembly fullname="Zero.Gdk"/>
+  <assembly fullname="Zero.Node"/>
+  <assembly fullname="Zero.Node.Client"/>
+  <assembly fullname="Newtonsoft.Json"/>
+  <assembly fullname="System.Core">
+    <type fullname="System.Linq.Expressions*" />
+  </assembly>
 </linker>
