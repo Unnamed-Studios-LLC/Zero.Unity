@@ -3,8 +3,8 @@ using Zero.Gdk;
 
 namespace Zero.Game
 {
-	public abstract class UnityComponentLogic<T> : ComponentLogic<T>
-		where T : IComponentModel, new()
+	public abstract class UnityComponentLogic<TModel> : ComponentLogic<TModel>
+		where TModel : struct, IComponentModel
 	{
 		public GameObject GameObject
 		{
