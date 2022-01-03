@@ -4,7 +4,7 @@ using Zero.Gdk;
 namespace Zero.Game
 {
 	public abstract class UnityComponentLogic<T> : ComponentLogic<T>
-		where T : class, ITyped, new()
+		where T : IComponentModel, new()
 	{
 		public GameObject GameObject
 		{
