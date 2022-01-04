@@ -1,11 +1,11 @@
 {
 	"name": "co.zeroservices.game",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Zero Game Services unity classes and integrations",
 	"displayName": "Zero Game Services",
 	"author": {
 		"name": "Zero Services",
-		"email": "contact@unnamedstudios.co",
+		"email": "support@zeroservices.co",
 		"url": "https://zeroservices.co"
 	},
 	"dependencies": {
