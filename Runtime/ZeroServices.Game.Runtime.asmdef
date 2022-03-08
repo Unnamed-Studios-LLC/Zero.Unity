@@ -7,9 +7,9 @@
     "allowUnsafeCode": true,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Zero.Gdk.dll",
-        "Zero.Node.Client.dll",
-        "Zero.Node.dll"
+        "Zero.Game.Client.dll",
+        "Zero.Game.Common.dll",
+        "Zero.Game.Shared.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

@@ -1,82 +1,59 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using UnityEngine;
-using Zero.Gdk;
+using Zero.Game.Shared;
 
-namespace Zero.Game
+namespace Zero.Unity
 {
-	public class ZeroUnityLogger : Zero.Gdk.ILogger
+	public class ZeroUnityLogger : ILoggingProvider
 	{
 		private class Logged
 		{
-			public LogLevel Level;
+            public Logged(LogLevel level, string message, Exception exception)
+            {
+                Level = level;
+                Message = message;
+				Exception = exception;
+            }
 
-			public string Message;
+			public LogLevel Level { get; }
+
+			public string Message { get; }
+
+			public Exception Exception { get; }
 		}
 
 		private readonly ConcurrentQueue<Logged> _logQueue = new ConcurrentQueue<Logged>();
-
-		public void Log(LogLevel level, string message)
-		{
-			_logQueue.Enqueue(new Logged
-			{
-				Level = level,
-				Message = message
-			});
-		}
-
-		public void LogCritical(string message)
-		{
-			Log(LogLevel.Critical, message);
-		}
-
-		public void LogCritical(Exception exception, string message)
-		{
-			Log(LogLevel.Critical, $"{message}\n{exception}");
-		}
-
-		public void LogDebug(string message)
-		{
-			Log(LogLevel.Debug, message);
-		}
-
-		public void LogError(string message)
-		{
-			Log(LogLevel.Error, message);
-		}
-
-		public void LogError(Exception exception, string message)
-		{
-			Log(LogLevel.Error, $"{message}\n{exception}");
-		}
-
-		public void LogInformation(string message)
-		{
-			Log(LogLevel.Information, message);
-		}
-
-		public void LogTrace(string message)
-		{
-			Log(LogLevel.Trace, message);
-		}
-
-		public void LogWarning(string message)
-		{
-			Log(LogLevel.Warning, message);
-		}
 
 		public void Update()
 		{
 			while (_logQueue.TryDequeue(out var logged))
 			{
-				InternalLog(logged.Level, logged.Message);
+				InternalLog(logged);
 			}
 		}
 
-		private void InternalLog(LogLevel level, string message)
+		private void InternalLog(Logged logged)
 		{
-			var logFunc = (level == LogLevel.Error || level == LogLevel.Critical) ? (Action<string>)Debug.LogError : Debug.Log;
-			logFunc($"[{level.ToString().ToUpper()}] {message}");
+			var logFunc = (logged.Level == LogLevel.Error || logged.Level == LogLevel.Critical) ? (Action<string>)Debug.LogError : Debug.Log;
+			if (logged.Exception != null)
+			{
+				logFunc($"[{logged.Level.ToString().ToUpper()}] {logged.Message}");
+			}
+			else
+			{
+				logFunc($"[{logged.Level.ToString().ToUpper()}] {logged.Message}\n{logged.Exception}");
+			}
 		}
-	}
+
+        public void Log(LogLevel logLevel, string message, Exception e)
+        {
+			_logQueue.Enqueue(new Logged(logLevel, message, e));
+        }
+
+        public void Log(LogLevel logLevel, string format, object[] args, Exception e)
+        {
+			Log(logLevel, string.Format(format, args), e);
+        }
+    }
 }
