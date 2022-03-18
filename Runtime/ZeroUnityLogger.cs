@@ -36,7 +36,7 @@ namespace Zero.Unity
 		private void InternalLog(Logged logged)
 		{
 			var logFunc = (logged.Level == LogLevel.Error || logged.Level == LogLevel.Critical) ? (Action<string>)Debug.LogError : Debug.Log;
-			if (logged.Exception != null)
+			if (logged.Exception == null)
 			{
 				logFunc($"[{logged.Level.ToString().ToUpper()}] {logged.Message}");
 			}
