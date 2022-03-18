@@ -9,7 +9,7 @@ namespace Zero.Unity
 	{
 		private class Logged
 		{
-            public Logged(LogLevel level, string message, Exception exception)
+            public Logged(LogLevel level, string message, string exception)
             {
                 Level = level;
                 Message = message;
@@ -20,7 +20,7 @@ namespace Zero.Unity
 
 			public string Message { get; }
 
-			public Exception Exception { get; }
+			public string Exception { get; }
 		}
 
 		private readonly ConcurrentQueue<Logged> _logQueue = new ConcurrentQueue<Logged>();
@@ -48,12 +48,12 @@ namespace Zero.Unity
 
         public void Log(LogLevel logLevel, string message, Exception e)
         {
-			_logQueue.Enqueue(new Logged(logLevel, message, e));
+			_logQueue.Enqueue(new Logged(logLevel, message, e?.ToString()));
         }
 
         public void Log(LogLevel logLevel, string format, object[] args, Exception e)
         {
-			Log(logLevel, string.Format(format, args), e);
+			Log(logLevel, string.Format(format, args), e?.ToString());
         }
     }
 }
