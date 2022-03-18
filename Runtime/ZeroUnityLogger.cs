@@ -53,7 +53,7 @@ namespace Zero.Unity
 
         public void Log(LogLevel logLevel, string format, object[] args, Exception e)
         {
-			Log(logLevel, string.Format(format, args), e?.ToString());
+			Log(logLevel, string.Format(format, args), e);
         }
     }
 }
