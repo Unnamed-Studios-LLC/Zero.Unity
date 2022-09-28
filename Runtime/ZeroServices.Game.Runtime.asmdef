@@ -7,8 +7,8 @@
     "allowUnsafeCode": true,
     "overrideReferences": true,
     "precompiledReferences": [
+        "Sytem.Runtime.CompilerServices.Unsafe.dll",
         "Zero.Game.Client.dll",
-        "Zero.Game.Common.dll",
         "Zero.Game.Shared.dll"
     ],
     "autoReferenced": true,
