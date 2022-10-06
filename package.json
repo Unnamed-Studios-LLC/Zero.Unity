@@ -1,15 +1,12 @@
 {
 	"name": "co.zeroservices.game",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"description": "Zero Game Services unity classes and integrations",
 	"displayName": "Zero Game Services",
 	"author": {
 		"name": "Zero Services",
 		"email": "support@zeroservices.co",
 		"url": "https://zeroservices.co"
-	},
-	"dependencies": {
-		"com.unity.nuget.newtonsoft-json": "2.0.0"
 	},
 	"keywords": [
 		"zero",
